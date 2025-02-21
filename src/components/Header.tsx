@@ -28,7 +28,7 @@ const Header: React.FC = () => {
             to="/contact" 
             className={({ isActive }) => isActive ? "text-gray-400" : "hover:text-gray-400"}
           >
-            Socials
+            Contact
           </NavLink>
         </div>
       </nav>

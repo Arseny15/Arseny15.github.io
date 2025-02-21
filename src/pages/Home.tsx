@@ -5,7 +5,7 @@ const Home: React.FC = () => {
     <div className="relative min-h-screen flex flex-col justify-center items-center bg-white text-center">
       
       {/* Full-Stack Title */}
-      <h1 className="text-4xl font-bold text-gray-900 mt-5">
+      <h1 className="text-4xl font-bold text-blue-900 mt-5">
         Full-Stack <br />
         <span className="text-lg font-normal text-gray-600">
           When Front-End and Back-End Collide Together
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
         
         {/* Left Side - Front-End */}
         <div className="w-1/2 bg-white flex flex-col items-center p-10">
-          <h1 className="text-5xl font-bold text-gray-900">Front-End</h1>
+          <h1 className="text-5xl font-bold text-blue-900">Front-End</h1>
           <ul className="text-gray-600 text-lg max-w-md mt-4 list-disc list-inside text-left">
             <li>Develop <strong>interactive and visually appealing</strong> user interfaces.</li>
             <li>Proficient in <strong>React, Tailwind CSS, and TypeScript</strong> for modern UI design.</li>
@@ -27,7 +27,7 @@ const Home: React.FC = () => {
 
         {/* Right Side - Back-End */}
         <div className="w-1/2 bg-gray-100 flex flex-col items-center p-10">
-          <h1 className="text-5xl font-bold text-gray-900">Back-End</h1>
+          <h1 className="text-5xl font-bold text-blue-900">Back-End</h1>
           <ul className="text-gray-600 text-lg max-w-md mt-4 list-disc list-inside text-left">
             <li>Developed a <strong>C++ 17 delay-tolerant retransmission system</strong> ensuring alarm signals are sent continuously for <strong>30 seconds</strong> to enhance multi-valve synchronization.</li>
             <li>Built <strong>ZigBee-based radio-sensor network programs</strong> to connect sensors with electric valves, optimizing <strong>real-time water leak detection</strong>.</li>
