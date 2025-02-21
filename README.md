@@ -16,8 +16,7 @@ You can find the website here:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/ethanwongca/ethanwongca.github.io.git
-    cd ethanwongca.github.io
+
     ```
 
 2. **Install dependencies:**
