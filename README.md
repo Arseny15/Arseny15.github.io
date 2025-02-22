@@ -18,7 +18,7 @@ You can find the website here: https://arseny15.github.io
 
     ```bash
     git clone https://github.com/Arseny15/Arseny15.github.io
-    cd portfolio
+    cd Arseny15.github.io
     ```
 
 2. **Install dependencies:**
