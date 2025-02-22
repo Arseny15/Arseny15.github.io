@@ -6,11 +6,11 @@ You can find the website here: https://arseny15.github.io
 
 
 ## Features
-✅ Fully responsive design for all devices
-✅ Fetches GitHub repositories dynamically via GitHub API
-✅ Modern UI built with Tailwind CSS
-✅ Optimized for fast performance and SEO
-✅ Hosted on GitHub Pages
+- Fully responsive design for all devices
+- Fetches GitHub repositories dynamically via GitHub API
+- Modern UI built with Tailwind CSS
+- Optimized for fast performance and SEO
+- Hosted on GitHub Pages
 
 ## Setup
 
