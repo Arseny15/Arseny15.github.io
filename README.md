@@ -46,6 +46,8 @@ You can find the website here: https://arseny15.github.io
     ```
 
 ## Folder Structure
+
+```bash
 portfolio-website/
 ├── public/                 # Static assets (accessible in production)
 │   ├── assets/             # Image & media assets
@@ -72,11 +74,11 @@ portfolio-website/
 ├── package.json            # Node.js project metadata
 ├── tailwind.config.js      # Tailwind CSS configuration
 └── README.md               # Project documentation
-
+```
 
 
 ## Tech Stack
 
-🔹 Languages: TypeScript, HTML, CSS, JavaScript
-🔹 Frameworks & Libraries: React.js, Tailwind CSS, Node.js
-🔹 Tools & Deployment: GitHub Pages, Vite/Webpack, ESLint
+- Languages: TypeScript, HTML, CSS, JavaScript
+- Frameworks & Libraries: React.js, Tailwind CSS, Node.js
+- Tools & Deployment: GitHub Pages, Vite/Webpack, ESLint
