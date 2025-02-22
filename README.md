@@ -2,21 +2,23 @@
 
 
 ## Website
-You can find the website here:
+You can find the website here: https://arseny15.github.io 
 
 
 ## Features
-- Responsive design
-- Dynamic content fetching from GitHub API
-- Interactive UI with Tailwind CSS
-- Real-time updates of GitHub repositories
+✅ Fully responsive design for all devices
+✅ Fetches GitHub repositories dynamically via GitHub API
+✅ Modern UI built with Tailwind CSS
+✅ Optimized for fast performance and SEO
+✅ Hosted on GitHub Pages
 
 ## Setup
 
 1. **Clone the repository:**
 
     ```bash
-
+    git clone https://github.com/Arseny15/Arseny15.github.io
+    cd portfolio
     ```
 
 2. **Install dependencies:**
@@ -44,35 +46,37 @@ You can find the website here:
     ```
 
 ## Folder Structure
-
-```plaintext
-ethanwongca.github.io/
-├── public/
-│   ├── favicon.ico
-│   ├── index.html
+portfolio-website/
+├── public/                 # Static assets (accessible in production)
+│   ├── assets/             # Image & media assets
+│   │   ├── my-image.JPG
+│   │   
+│   ├── favicon.ico         # Site icon
+│   ├── index.html          # Main HTML file
+│   ├── robots.txt          # SEO-related configurations
 │   └── ...
-├── src/
-│   ├── assets/
-│   │   └── headshot.jpg
-│   ├── components/
-│   │   └── Header.tsx
-│   ├── pages/
-│   │   ├── About.tsx
-│   │   ├── CV.tsx
-│   │   ├── Publications.tsx
+├── src/                    # React application source files
+│   ├── components/         # Reusable UI components
+│   │   ├── Header.tsx
+│   │   └── ...
+│   ├── pages/              # Page-specific components
+│   │   ├── Home.tsx
 │   │   ├── Projects.tsx
-│   │   └── Socials.tsx
-│   ├── App.tsx
-│   ├── index.css
-│   └── index.tsx
-├── .gitignore
-├── package.json
-└── README.md
-```
+│   │   ├── CV.tsx
+│   │   └── Contact.tsx
+│   ├── App.tsx             # Root React component
+│   ├── index.css           # Global styles
+│   ├── index.tsx           # React entry point
+│   └── ...
+├── .gitignore              # Git ignore file
+├── package.json            # Node.js project metadata
+├── tailwind.config.js      # Tailwind CSS configuration
+└── README.md               # Project documentation
 
 
 
-## Libraries Used
+## Tech Stack
 
-**Languages**: TypeScript, HTML, CSS, and JavaScript <br/>
-**Technologies**: React.js, Tailwind CSS, Node.js 
+🔹 Languages: TypeScript, HTML, CSS, JavaScript
+🔹 Frameworks & Libraries: React.js, Tailwind CSS, Node.js
+🔹 Tools & Deployment: GitHub Pages, Vite/Webpack, ESLint
