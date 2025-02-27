@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .gradient-text {
+    font-family: "Ubuntu", sans-serif;
+    background: linear-gradient(
+      90deg,
+      #d9dceb,
+      #6a7daa,
+      #2b537b,
+      #090b47
+    );
+    background-size: 300% 100%;
+    animation: shimmer 3s infinite alternate ease-in-out;
+    background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
+    color: transparent;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 0% 0;
+    }
+  }
+}
