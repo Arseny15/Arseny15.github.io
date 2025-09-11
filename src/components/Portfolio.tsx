@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { FiMail as Mail, FiGithub as Github, FiLinkedin as Linkedin, FiDownload as Download, FiArrowRight as ArrowRight, FiExternalLink as ExternalLink, FiMapPin as MapPin } from "react-icons/fi";
+// Icons replaced with emojis to avoid TypeScript issues
 import TechnicalSkillsSection from "./TechnicalSkillsSection";
 
 
@@ -270,7 +270,7 @@ const Portfolio: React.FC = () => {
        <div className="content grid items-center gap-8 sm:gap-10 md:grid-cols-2">
          <div className="text-center md:text-left order-2 md:order-1">
            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm mb-4">
-             <MapPin className="h-4 w-4 text-sky-300" /> {DATA.location}
+             <span className="h-4 w-4 text-sky-300">📍</span> {DATA.location}
            </div>
            <div className="max-w-xl mx-auto md:mx-0">
              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-sky-300 text-center md:text-left leading-tight">
@@ -283,7 +283,7 @@ const Portfolio: React.FC = () => {
              {/* First row: Action buttons */}
              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
                <Button href="#projects" className="text-sm sm:text-base px-6 py-3">
-                 <span>View Projects</span> <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <span>View Projects</span> <span className="h-4 w-4 sm:h-5 sm:w-5">→</span>
                </Button>
                <Button href="#contact" variant="outline" className="text-sm sm:text-base px-6 py-3">Contact</Button>
              </div>
@@ -291,20 +291,20 @@ const Portfolio: React.FC = () => {
              {/* Second row: Resume buttons */}
              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
                <Button href={DATA.resumeEngineerHref} variant="secondary" className="text-sm sm:text-base px-6 py-3">
-                 <Download className="h-4 w-4 sm:h-5 sm:w-5" /> <span className="hidden sm:inline">Resume — Software</span><span className="sm:hidden">Resume SE</span>
+                  <span className="h-4 w-4 sm:h-5 sm:w-5">📥</span> <span className="hidden sm:inline">Resume — Software</span><span className="sm:hidden">Resume SE</span>
                </Button>
                <Button href={DATA.resumeProjectHref} variant="outline" className="text-sm sm:text-base px-6 py-3">
-                 <Download className="h-4 w-4 sm:h-5 sm:w-5" /> <span className="hidden sm:inline">Resume — PM</span><span className="sm:hidden">Resume PM</span>
+                 <span className="h-4 w-4 sm:h-5 sm:w-5">📥</span> <span className="hidden sm:inline">Resume — PM</span><span className="sm:hidden">Resume PM</span>
                </Button>
              </div>
              
              {/* Third row: Social links */}
              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
                <Button href={DATA.linkedin} variant="outline" className="text-sm sm:text-base px-6 py-3">
-                 <Linkedin className="h-4 w-4 sm:h-5 sm:w-5" /> <span className="hidden sm:inline">LinkedIn</span>
+                 <span className="h-4 w-4 sm:h-5 sm:w-5">💼</span> <span className="hidden sm:inline">LinkedIn</span>
                </Button>
                <Button href={DATA.github} variant="ghost" className="text-sm sm:text-base px-6 py-3">
-                 <Github className="h-4 w-4 sm:h-5 sm:w-5" /> <span className="hidden sm:inline">GitHub</span>
+                 <span className="h-4 w-4 sm:h-5 sm:w-5">🐙</span> <span className="hidden sm:inline">GitHub</span>
                </Button>
              </div>
            </div>
@@ -407,7 +407,7 @@ const Portfolio: React.FC = () => {
                <div className="mt-4 flex flex-wrap gap-2 sm:gap-3">
                  {p.links.map((l: any) => (
                    <a key={l.href} className="inline-flex items-center gap-1 text-sm text-sky-300 hover:underline" href={l.href}>
-                     {l.label} <ExternalLink className="h-3 w-3" />
+                     {l.label} <span className="h-3 w-3">↗</span>
                    </a>
                  ))}
                </div>
@@ -426,16 +426,16 @@ const Portfolio: React.FC = () => {
            <p className="mt-2 text-sm sm:text-base text-slate-300">Want to collaborate or chat? Reach out via email or LinkedIn.</p>
            <div className="mt-4 sm:mt-6 flex flex-wrap gap-2 sm:gap-3">
              <Button href={`mailto:${DATA.email}`} className="text-xs sm:text-sm">
-               <Mail className="h-3 w-3 sm:h-4 sm:w-4" /> <span>Email Me</span>
+               <span className="h-3 w-3 sm:h-4 sm:w-4">✉️</span> <span>Email Me</span>
              </Button>
              <Button href={DATA.linkedin} variant="outline" className="text-xs sm:text-sm">
-               <Linkedin className="h-3 w-3 sm:h-4 sm:w-4" /> <span>LinkedIn</span>
+               <span className="h-3 w-3 sm:h-4 sm:w-4">💼</span> <span>LinkedIn</span>
              </Button>
              <Button href={DATA.resumeEngineerHref} variant="outline" download className="text-xs sm:text-sm">
-               <Download className="h-3 w-3 sm:h-4 sm:w-4" /> <span className="hidden sm:inline">Resume — Software</span><span className="sm:hidden">Resume SE</span>
+               <span className="h-3 w-3 sm:h-4 sm:w-4">📥</span> <span className="hidden sm:inline">Resume — Software</span><span className="sm:hidden">Resume SE</span>
              </Button>
              <Button href={DATA.resumeProjectHref} variant="outline" download className="text-xs sm:text-sm">
-               <Download className="h-3 w-3 sm:h-4 sm:w-4" /> <span className="hidden sm:inline">Resume — PM</span><span className="sm:hidden">Resume PM</span>
+               <span className="h-3 w-3 sm:h-4 sm:w-4">📥</span> <span className="hidden sm:inline">Resume — PM</span><span className="sm:hidden">Resume PM</span>
              </Button>
            </div>
          </div>
@@ -443,12 +443,12 @@ const Portfolio: React.FC = () => {
            <CardHeader><CardTitle className="text-base sm:text-lg">Quick Links</CardTitle></CardHeader>
            <CardContent className="grid gap-2 sm:gap-3 text-sm">
              <a className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sky-300 hover:bg-white/10 transition-colors duration-200" href={DATA.github}>
-               <span className="flex items-center gap-2"><Github className="h-4 w-4" /> GitHub</span>
-               <ExternalLink className="h-3 w-3" />
+               <span className="flex items-center gap-2"><span className="h-4 w-4">🐙</span> GitHub</span>
+               <span className="h-3 w-3">↗</span>
              </a>
              <a className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sky-300 hover:bg-white/10 transition-colors duration-200" href={DATA.linkedin}>
-               <span className="flex items-center gap-2"><Linkedin className="h-4 w-4" /> LinkedIn</span>
-               <ExternalLink className="h-3 w-3" />
+               <span className="flex items-center gap-2"><span className="h-4 w-4">💼</span> LinkedIn</span>
+               <span className="h-3 w-3">↗</span>
              </a>
            </CardContent>
          </Card>
