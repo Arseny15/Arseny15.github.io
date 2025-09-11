@@ -1,18 +1,34 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
+
   return (
-    <header className="bg-gray-900 text-white p-4">
-      <nav className="container mx-auto flex justify-center">
+    <header className="bg-slate-950 text-slate-100 p-4 border-b border-white/10 sticky top-0 z-50 backdrop-blur-md">
+      <nav className="container mx-auto flex items-center relative">
+        {/* Name on the left */}
+        <div className="flex items-center">
+          <button
+            onClick={() => scrollToSection('home')}
+            className="text-sky-300 hover:text-sky-200 transition-colors duration-200 font-bold text-xl lg:text-2xl"
+          >
+            Arsenii Stolbov
+          </button>
+        </div>
+
         {/* Hamburger Menu (Mobile) */}
         <button
-          className="md:hidden absolute left-4 text-white focus:outline-none"
+          className="md:hidden text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-300 rounded-lg p-2 absolute right-0"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {/* Simple Hamburger Icon */}
           <svg
             className="w-6 h-6"
             fill="none"
@@ -29,73 +45,85 @@ const Header: React.FC = () => {
           </svg>
         </button>
 
-        {/* Desktop & Mobile Navigation */}
-        <div className="hidden md:flex space-x-20">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? "text-gray-400" : "hover:text-gray-400"
-            }
+        {/* Desktop Navigation - Centered */}
+        <div className="hidden md:flex space-x-4 lg:space-x-6 absolute left-1/2 transform -translate-x-1/2">
+          <button
+            onClick={() => scrollToSection('home')}
+            className="text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold text-base lg:text-lg px-3 py-2 rounded-lg hover:bg-white/5"
           >
             About
-          </NavLink>
-          <NavLink
-            to="/cv"
-            className={({ isActive }) =>
-              isActive ? "text-gray-400" : "hover:text-gray-400"
-            }
+          </button>
+          <button
+            onClick={() => scrollToSection('education')}
+            className="text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold text-base lg:text-lg px-3 py-2 rounded-lg hover:bg-white/5"
           >
-            CV
-          </NavLink>
-          <NavLink
-            to="/projects"
-            className={({ isActive }) =>
-              isActive ? "text-gray-400" : "hover:text-gray-400"
-            }
+            Education
+          </button>
+          <button
+            onClick={() => scrollToSection('experience')}
+            className="text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold text-base lg:text-lg px-3 py-2 rounded-lg hover:bg-white/5"
+          >
+            Experience
+          </button>
+          <button
+            onClick={() => scrollToSection('projects')}
+            className="text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold text-base lg:text-lg px-3 py-2 rounded-lg hover:bg-white/5"
           >
             Projects
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              isActive ? "text-gray-400" : "hover:text-gray-400"
-            }
+          </button>
+          <button
+            onClick={() => scrollToSection('skills')}
+            className="text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold text-base lg:text-lg px-3 py-2 rounded-lg hover:bg-white/5"
+          >
+            Skills
+          </button>
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold text-base lg:text-lg px-3 py-2 rounded-lg hover:bg-white/5"
           >
             Contact
-          </NavLink>
+          </button>
         </div>
 
         {/* Mobile Menu (Dropdown) */}
         {isOpen && (
-          <div className="absolute top-16 left-0 w-full bg-gray-900 p-4 flex flex-col items-center md:hidden">
-            <NavLink
-              to="/"
-              className="py-2 text-lg hover:text-gray-400"
-              onClick={() => setIsOpen(false)}
+          <div className="absolute top-20 left-0 w-full bg-slate-950/95 backdrop-blur-md p-6 flex flex-col items-center md:hidden border-t border-white/10">
+            <button
+              onClick={() => scrollToSection('home')}
+              className="py-4 text-xl text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold px-4 rounded-lg hover:bg-white/5 w-full text-center"
             >
               About
-            </NavLink>
-            <NavLink
-              to="/cv"
-              className="py-2 text-lg hover:text-gray-400"
-              onClick={() => setIsOpen(false)}
+            </button>
+            <button
+              onClick={() => scrollToSection('education')}
+              className="py-4 text-xl text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold px-4 rounded-lg hover:bg-white/5 w-full text-center"
             >
-              CV
-            </NavLink>
-            <NavLink
-              to="/projects"
-              className="py-2 text-lg hover:text-gray-400"
-              onClick={() => setIsOpen(false)}
+              Education
+            </button>
+            <button
+              onClick={() => scrollToSection('experience')}
+              className="py-4 text-xl text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold px-4 rounded-lg hover:bg-white/5 w-full text-center"
+            >
+              Experience
+            </button>
+            <button
+              onClick={() => scrollToSection('projects')}
+              className="py-4 text-xl text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold px-4 rounded-lg hover:bg-white/5 w-full text-center"
             >
               Projects
-            </NavLink>
-            <NavLink
-              to="/contact"
-              className="py-2 text-lg hover:text-gray-400"
-              onClick={() => setIsOpen(false)}
+            </button>
+            <button
+              onClick={() => scrollToSection('skills')}
+              className="py-4 text-xl text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold px-4 rounded-lg hover:bg-white/5 w-full text-center"
+            >
+              Skills
+            </button>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="py-4 text-xl text-slate-300 hover:text-sky-300 transition-colors duration-200 font-semibold px-4 rounded-lg hover:bg-white/5 w-full text-center"
             >
               Contact
-            </NavLink>
+            </button>
           </div>
         )}
       </nav>
