@@ -15,8 +15,7 @@ const DATA = {
  phone: "+1 604 802 8582",
  linkedin: "https://www.linkedin.com/in/arsenii-stolbov-43415931a/",
  github: "https://github.com/Arseny15",
- resumeEngineerHref: "ArseniiStolbov_Resume_SE.pdf",
- resumeProjectHref: "ArseniiStolbov_Resume_PM.pdf",
+ resumeHref: "ArseniiStolbov_Resume.pdf",
  summary:
    "A skilled and driven software development professional with nearly two years of hands-on experience creating innovative software solutions, leading complex technical projects, and integrating technical expertise with product-focused strategies. Leveraging a robust academic background in Computer Science along with proven leadership skills cultivated through elite athletics and entrepreneurial experience, I bring a unique blend of technical proficiency and strategic thinking. Eager to apply my development expertise and product management capabilities to drive meaningful innovation in the IT industry.",
  skills: {
@@ -280,21 +279,17 @@ const Portfolio: React.FC = () => {
            </div>
            <p className="mt-6 text-lg sm:text-xl lg:text-2xl font-semibold text-sky-200">{typed}</p>
            <div className="mt-6 sm:mt-8 flex flex-col gap-5 justify-center md:justify-start">
-             {/* First row: Action buttons */}
+             {/* First row: Action button */}
              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
                <Button href="#projects" className="text-sm sm:text-base px-6 py-3">
                   <span>View Projects</span> <span className="h-4 w-4 sm:h-5 sm:w-5">→</span>
                </Button>
-               <Button href="#contact" variant="outline" className="text-sm sm:text-base px-6 py-3">Contact</Button>
              </div>
              
-             {/* Second row: Resume buttons */}
+             {/* Second row: Resume button */}
              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
-               <Button href={DATA.resumeEngineerHref} variant="secondary" className="text-sm sm:text-base px-6 py-3">
-                  <span className="h-4 w-4 sm:h-5 sm:w-5">📥</span> <span className="hidden sm:inline">Resume — Software</span><span className="sm:hidden">Resume SE</span>
-               </Button>
-               <Button href={DATA.resumeProjectHref} variant="outline" className="text-sm sm:text-base px-6 py-3">
-                 <span className="h-4 w-4 sm:h-5 sm:w-5">📥</span> <span className="hidden sm:inline">Resume — PM</span><span className="sm:hidden">Resume PM</span>
+               <Button href={DATA.resumeHref} variant="secondary" className="text-sm sm:text-base px-6 py-3" download>
+                  <span className="h-4 w-4 sm:h-5 sm:w-5">📥</span> <span>Resume</span>
                </Button>
              </div>
              
@@ -431,11 +426,8 @@ const Portfolio: React.FC = () => {
              <Button href={DATA.linkedin} variant="outline" className="text-xs sm:text-sm">
                <span className="h-3 w-3 sm:h-4 sm:w-4">💼</span> <span>LinkedIn</span>
              </Button>
-             <Button href={DATA.resumeEngineerHref} variant="outline" download className="text-xs sm:text-sm">
-               <span className="h-3 w-3 sm:h-4 sm:w-4">📥</span> <span className="hidden sm:inline">Resume — Software</span><span className="sm:hidden">Resume SE</span>
-             </Button>
-             <Button href={DATA.resumeProjectHref} variant="outline" download className="text-xs sm:text-sm">
-               <span className="h-3 w-3 sm:h-4 sm:w-4">📥</span> <span className="hidden sm:inline">Resume — PM</span><span className="sm:hidden">Resume PM</span>
+             <Button href={DATA.resumeHref} variant="outline" download className="text-xs sm:text-sm">
+               <span className="h-3 w-3 sm:h-4 sm:w-4">📥</span> <span>Resume</span>
              </Button>
            </div>
          </div>
