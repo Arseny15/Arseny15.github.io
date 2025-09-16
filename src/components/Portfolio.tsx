@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 // Icons replaced with emojis to avoid TypeScript issues
 import TechnicalSkillsSection from "./TechnicalSkillsSection";
+import { GitHubService, ProjectData } from "../services/githubService";
+import { ProjectUpdater } from "../utils/projectUpdater";
 
 
 // Uses existing avatar at public/assets/my-image.JPG. Update path if needed.
@@ -89,6 +91,13 @@ const DATA = {
    },
  ],
  projects: [
+   {
+     name: "DriverGuard AI",
+     period: "Dec 2024 – Present",
+     desc: "AI-powered driver safety monitoring system using computer vision and machine learning to detect drowsiness and distracted driving.",
+     links: [],
+     tags: ["Python", "Computer Vision", "Machine Learning", "OpenCV", "TensorFlow"],
+   },
    {
      name: "Real‑time Trading Platform",
      period: "Oct 2024 – Dec 2024",
@@ -192,7 +201,7 @@ function Pill({ children }: { children: React.ReactNode }) {
 }
 
 
-function Button({ children, variant = "primary", href, download, className = "" }: { children: React.ReactNode; variant?: "primary" | "secondary" | "outline" | "ghost"; href?: string; download?: boolean; className?: string }) {
+function Button({ children, variant = "primary", href, download, onClick, disabled, className = "" }: { children: React.ReactNode; variant?: "primary" | "secondary" | "outline" | "ghost"; href?: string; download?: boolean; onClick?: () => void; disabled?: boolean; className?: string }) {
  const base = "inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-300";
  const styles = {
    primary: "bg-sky-600 text-white hover:bg-sky-500",
@@ -200,14 +209,25 @@ function Button({ children, variant = "primary", href, download, className = "" 
    outline: "border border-white/20 text-slate-100 hover:bg-white/10",
    ghost: "text-sky-200 hover:text-white",
  } as const;
+ 
+ const buttonClasses = `${base} ${styles[variant]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
+ 
  if (href) {
    return (
-     <a href={href} download={download} className={`${base} ${styles[variant]} ${className}`}>
+     <a href={href} download={download} className={buttonClasses}>
        {children}
      </a>
    );
  }
- return <button className={`${base} ${styles[variant]} ${className}`}>{children}</button>;
+ return (
+   <button 
+     onClick={onClick} 
+     disabled={disabled}
+     className={buttonClasses}
+   >
+     {children}
+   </button>
+ );
 }
 
 
@@ -259,6 +279,136 @@ const Portfolio: React.FC = () => {
    "I ship fast and learn faster.",
  ]);
  const year = useMemo(() => new Date().getFullYear(), []);
+ 
+ // State for dynamic projects from GitHub
+ const [projects, setProjects] = useState<ProjectData[]>([]);
+ const [projectsLoading, setProjectsLoading] = useState(true);
+ const [projectsError, setProjectsError] = useState<string | null>(null);
+ const [refreshing, setRefreshing] = useState(false);
+
+ // Fetch projects from GitHub on component mount
+ useEffect(() => {
+   const loadProjects = async () => {
+     try {
+       setProjectsLoading(true);
+       setProjectsError(null);
+       
+       // Clear cache first to ensure fresh data
+       localStorage.removeItem('github_projects_cache');
+       
+       // Fetch fresh data directly from GitHub
+       const repos = await GitHubService.fetchUserRepos();
+       console.log('Raw GitHub repos on load:', repos);
+       
+       // Convert repos to projects
+       const projects = repos
+         .filter(repo => !repo.name.includes('Arseny15.github.io'))
+         .map(repo => {
+           const createdDate = new Date(repo.created_at);
+           const updatedDate = new Date(repo.updated_at);
+           const period = `${createdDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} – ${updatedDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`;
+           
+           const tags = [
+             ...(repo.language ? [repo.language] : []),
+             ...repo.topics.slice(0, 3)
+           ];
+           
+           return {
+             name: repo.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+             period: period,
+             desc: repo.description || 'A software project showcasing various technologies and best practices.',
+             tags: tags,
+             links: [
+               { label: 'GitHub', href: repo.html_url },
+               ...(repo.homepage ? [{ label: 'Live Demo', href: repo.homepage }] : [])
+             ],
+             githubUrl: repo.html_url,
+             stars: repo.stargazers_count,
+             forks: repo.forks_count,
+             lastUpdated: repo.updated_at,
+             language: repo.language || undefined
+           };
+         })
+         .sort((a, b) => new Date(b.lastUpdated || 0).getTime() - new Date(a.lastUpdated || 0).getTime());
+       
+       console.log('Processed projects on load:', projects);
+       setProjects(projects);
+     } catch (error) {
+       console.error('Failed to load projects:', error);
+       setProjectsError('Failed to load projects from GitHub');
+       // Fallback to static projects if GitHub fails
+       const fallbackProjects = DATA.projects.map(p => ({
+         ...p,
+         links: p.links || [],
+         githubUrl: undefined,
+         stars: 0,
+         forks: 0,
+         lastUpdated: undefined,
+         language: undefined
+       }));
+       console.log('Using fallback projects:', fallbackProjects);
+       setProjects(fallbackProjects);
+     } finally {
+       setProjectsLoading(false);
+     }
+   };
+
+   loadProjects();
+ }, []);
+
+ // Function to refresh projects manually
+ const refreshProjects = async () => {
+   try {
+     setRefreshing(true);
+     setProjectsError(null);
+     // Clear all caches to force fresh fetch
+     localStorage.removeItem('github_projects_cache');
+     // Clear any existing projects state
+     setProjects([]);
+     // Fetch fresh data directly from GitHub
+     const refreshedProjects = await GitHubService.fetchUserRepos();
+     console.log('Raw GitHub repos:', refreshedProjects);
+     
+     // Convert repos to projects
+     const projects = refreshedProjects
+       .filter(repo => !repo.name.includes('Arseny15.github.io'))
+       .map(repo => {
+         const createdDate = new Date(repo.created_at);
+         const updatedDate = new Date(repo.updated_at);
+         const period = `${createdDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} – ${updatedDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`;
+         
+         const tags = [
+           ...(repo.language ? [repo.language] : []),
+           ...repo.topics.slice(0, 3)
+         ];
+         
+         return {
+           name: repo.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+           period: period,
+           desc: repo.description || 'A software project showcasing various technologies and best practices.',
+           tags: tags,
+           links: [
+             { label: 'GitHub', href: repo.html_url },
+             ...(repo.homepage ? [{ label: 'Live Demo', href: repo.homepage }] : [])
+           ],
+           githubUrl: repo.html_url,
+           stars: repo.stargazers_count,
+           forks: repo.forks_count,
+           lastUpdated: repo.updated_at,
+           language: repo.language || undefined
+         };
+       })
+       .sort((a, b) => new Date(b.lastUpdated || 0).getTime() - new Date(a.lastUpdated || 0).getTime());
+     
+     console.log('Processed projects:', projects);
+     setProjects(projects);
+   } catch (error) {
+     console.error('Failed to refresh projects:', error);
+     setProjectsError('Failed to refresh projects from GitHub');
+   } finally {
+     setRefreshing(false);
+   }
+ };
 
 
  return (
@@ -279,21 +429,28 @@ const Portfolio: React.FC = () => {
            </div>
            <p className="mt-6 text-lg sm:text-xl lg:text-2xl font-semibold text-sky-200">{typed}</p>
            <div className="mt-6 sm:mt-8 flex flex-col gap-5 justify-center md:justify-start">
-             {/* First row: Action button */}
+             {/* First row: Experience button */}
+             <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
+               <Button href="#experience" className="text-sm sm:text-base px-6 py-3">
+                  <span>View Experience</span> <span className="h-4 w-4 sm:h-5 sm:w-5">→</span>
+               </Button>
+             </div>
+             
+             {/* Second row: Projects button */}
              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
                <Button href="#projects" className="text-sm sm:text-base px-6 py-3">
                   <span>View Projects</span> <span className="h-4 w-4 sm:h-5 sm:w-5">→</span>
                </Button>
              </div>
              
-             {/* Second row: Resume button */}
+             {/* Third row: Resume button */}
              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
                <Button href={DATA.resumeHref} variant="secondary" className="text-sm sm:text-base px-6 py-3" download>
                   <span className="h-4 w-4 sm:h-5 sm:w-5">📥</span> <span>Resume</span>
                </Button>
              </div>
              
-             {/* Third row: Social links */}
+             {/* Fourth row: Social links */}
              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start">
                <Button href={DATA.linkedin} variant="outline" className="text-sm sm:text-base px-6 py-3">
                  <span className="h-4 w-4 sm:h-5 sm:w-5">💼</span> <span className="hidden sm:inline">LinkedIn</span>
@@ -379,9 +536,30 @@ const Portfolio: React.FC = () => {
      <Section id="projects">
        <div className="flex items-center justify-between">
          <h2 className="text-xl sm:text-2xl font-bold text-sky-300">Projects</h2>
+         <div className="flex items-center gap-3">
+           {projectsLoading && (
+             <div className="text-sm text-slate-400">Loading from GitHub...</div>
+           )}
+           <Button 
+             onClick={refreshProjects}
+             disabled={refreshing || projectsLoading}
+             variant="outline"
+             className="text-xs px-3 py-1"
+           >
+             <span className="h-3 w-3">🔄</span>
+             <span>{refreshing ? 'Refreshing...' : 'Refresh'}</span>
+           </Button>
+         </div>
        </div>
+       
+       {projectsError && (
+         <div className="mt-4 p-4 bg-red-900/20 border border-red-500/30 rounded-lg text-red-300">
+           {projectsError} - Showing cached projects.
+         </div>
+       )}
+       
        <div className="content mt-6 grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2">
-         {DATA.projects.map((p) => (
+         {projects.map((p) => (
            <div key={p.name} className="group rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5 lg:p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/10">
              <div className="flex items-start justify-between gap-3 sm:gap-4">
                <div className="flex-1 min-w-0">
@@ -389,7 +567,7 @@ const Portfolio: React.FC = () => {
                  <p className="text-xs text-slate-400 mt-1">{p.period}</p>
                </div>
                <div className="rounded-full bg-sky-400/10 px-2 sm:px-3 py-1 text-xs text-sky-200 ring-1 ring-inset ring-sky-400/30 flex-shrink-0">
-                 {p.tags[0]}
+                 {p.language || p.tags[0]}
                </div>
              </div>
              <p className="mt-3 text-sm leading-relaxed text-slate-300">{p.desc}</p>
@@ -398,15 +576,21 @@ const Portfolio: React.FC = () => {
                  <Pill key={t}>{t}</Pill>
                ))}
              </div>
-             {p.links?.length ? (
-               <div className="mt-4 flex flex-wrap gap-2 sm:gap-3">
-                 {p.links.map((l: any) => (
-                   <a key={l.href} className="inline-flex items-center gap-1 text-sm text-sky-300 hover:underline" href={l.href}>
-                     {l.label} <span className="h-3 w-3">↗</span>
-                   </a>
-                 ))}
-               </div>
-             ) : null}
+             
+             {/* GitHub and other links */}
+             <div className="mt-4 flex flex-wrap gap-2 sm:gap-3">
+               {p.links?.map((l) => (
+                 <a 
+                   key={l.href} 
+                   href={l.href} 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   className="inline-flex items-center gap-1 text-sm text-sky-300 hover:text-sky-200 hover:underline transition-colors"
+                 >
+                   {l.label} <span className="h-3 w-3">↗</span>
+                 </a>
+               ))}
+             </div>
            </div>
          ))}
        </div>
