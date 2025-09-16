@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-slate-950 text-slate-100 p-4 border-b border-white/10 sticky top-0 z-50 backdrop-blur-md">
+    <header className="bg-slate-950/95 text-slate-100 p-4 border-b border-white/10 fixed top-0 left-0 right-0 z-50 backdrop-blur-md">
       <nav className="container mx-auto flex items-center relative">
         {/* Name on the left */}
         <div className="flex items-center">
