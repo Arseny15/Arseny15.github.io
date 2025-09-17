@@ -1,5 +1,6 @@
 # Portfolio Website 
 
+<!-- Updated: $(date) -->
 
 ## Website
 You can find the website here: https://arseny15.github.io 
