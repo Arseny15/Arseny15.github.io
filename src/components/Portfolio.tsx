@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 // Icons replaced with emojis to avoid TypeScript issues
 import TechnicalSkillsSection from "./TechnicalSkillsSection";
 import { GitHubService, ProjectData } from "../services/githubService";
-import { ProjectUpdater } from "../utils/projectUpdater";
 
 
 // Uses existing avatar at public/assets/my-image.JPG. Update path if needed.
@@ -17,7 +16,7 @@ const DATA = {
  phone: "+1 604 802 8582",
  linkedin: "https://www.linkedin.com/in/arsenii-stolbov-43415931a/",
  github: "https://github.com/Arseny15",
- resumeHref: "ArseniiStolbov_Resume.pdf",
+ resumeHref: "/ArseniiStolbov_Resume.pdf",
  summary:
    "A skilled and driven software development professional with nearly two years of hands-on experience creating innovative software solutions, leading complex technical projects, and integrating technical expertise with product-focused strategies. Leveraging a robust academic background in Computer Science along with proven leadership skills cultivated through elite athletics and entrepreneurial experience, I bring a unique blend of technical proficiency and strategic thinking. Eager to apply my development expertise and product management capabilities to drive meaningful innovation in the IT industry.",
  skills: {
@@ -213,8 +212,14 @@ function Button({ children, variant = "primary", href, download, onClick, disabl
  const buttonClasses = `${base} ${styles[variant]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
  
  if (href) {
+   const isPDF = href.toLowerCase().endsWith('.pdf');
    return (
-     <a href={href} download={download} className={buttonClasses}>
+     <a 
+       href={href} 
+       download={download} 
+       className={buttonClasses}
+       type={isPDF ? "application/pdf" : undefined}
+     >
        {children}
      </a>
    );
