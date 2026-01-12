@@ -62,16 +62,15 @@ const DATA = {
      ],
    },
    {
-     role: "Business Development Manager (Summer Internship)",
+     role: "Business Analyst Manager (Summer Internship)",
      company: "Delumo — Salzburg, Austria",
      date: "Apr 2024 – Jul 2024",
      start: "2024-04",
      bullets: [
-       "Launched the English/German website; traffic up ~65%; ~18 inbound leads/month after launch.",
-       "Held 20+ conversations with insurance partners in Europe and China; received 2 partnership interest letters and built ~C$55K in likely deals.",
-       "Organized 3 conferences with bronze-level sponsorships; collected 32 qualified leads at ~C$28 per potential customer.",
-       "Built a simple sales pipeline in the CRM; kept deal notes clean and up to date; cut time from first email to first meeting by ~5 days.",
-       "Created sales materials (decks, one-pagers) tailored for English and German audiences.",
+        "Performed SQL queries to analyse transaction data, user behaviour, and partner performance, supporting data-driven product and business decisions.",
+        "Analysed insurance companies' and brokers' workflows to identify process gaps and opportunities for automation and optimisation using artificial intelligence.",
+        "Collaborated with product managers and engineers in Agile teams to ensure timely delivery in line with business objectives.",
+        "Led market and partner analysis for more than 20 strategic negotiations with insurance companies in Europe, evaluating partnership models, commercial impact, and integration requirements.",
      ],
    },
    {
