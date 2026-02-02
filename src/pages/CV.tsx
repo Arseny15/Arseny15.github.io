@@ -33,7 +33,7 @@ const CV: React.FC = () => {
 
             <div className="border-l-4 border-gray-300 pl-4 mb-4">
               <p><strong>Company:</strong> GidroLock (Moscow, Russia)</p>
-              <p><strong>Role:</strong> Software Engineer Intern</p>
+              <p><strong>Role:</strong> Technical Project Manager</p>
               <p><strong>Duration:</strong> Jan 2023 - Jan 2024</p>
               <p className="font-semibold text-blue-700">Sensor-to-Multi-Valve Communication Enhancement:</p>
               <ul className="list-disc pl-6">
@@ -54,13 +54,13 @@ const CV: React.FC = () => {
 
             <div className="border-l-4 border-gray-300 pl-4 mb-4">
               <p><strong>Company:</strong> Delumo (Salzburg, Austria)</p>
-              <p><strong>Role:</strong> Business Development Manager Intern</p>
+              <p><strong>Role:</strong> Technical Project Manager</p>
               <p><strong>Duration:</strong> Apr 2024 - Jul 2024</p>
               <p><strong>Responsibilities:</strong></p>
               <ul className="list-disc pl-6">
-                <li>Assisted in the creation of new websites in English and German as a front-end developer, utilizing web development frameworks.</li>
-                <li>Conducted over 20 high-stakes negotiations with key insurance companies in Europe and China, securing strategic partnerships and driving business growth.</li>
-                <li>Spearheaded the development and promotion of the company in Europe.</li>
+                <li>Performed SQL queries to analyse transaction data, user behaviour, and partner performance, supporting data-driven product and business decisions.</li>
+                <li>Led market and partner analysis for more than 20 strategic negotiations with insurance companies in Europe, evaluating partnership models, commercial impact, and integration requirements.</li>
+                <li>Collaborated with product managers and engineers in Agile teams to ensure timely delivery in line with business objectives.</li>
               </ul>
             </div>
           </div>

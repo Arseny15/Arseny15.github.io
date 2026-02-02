@@ -50,19 +50,18 @@ const DATA = {
      ],
    },
    {
-     role: "Software Engineer (Intern)",
+     role: "Technical Project Manager",
      company: "Gidrolock — Moscow, Russia",
      date: "Jan 2023 – Jan 2024",
      start: "2023-01",
      bullets: [
-       "Embedded firmware for Wi‑Fi/ZigBee/LoRa devices on PIC microcontrollers.",
-       "Low‑power radio sensors (−25% battery) via sleep scheduling & interrupts.",
-       "Real‑time leak detection with dual‑valve coordination (−40% failures).",
-       "Designed RS485 support and custom protocols for secure sensor networks.",
+       "Led integration of a ZigBee-based radio sensor network with automated valve control systems, coordinating firmware development and device communication architecture.",
+       "Defined technical requirements and supervised implementation to ensure reliable real-time sensor-to-valve response in water detection scenarios.",
+       "Drove performance improvements that reduced response latency and increased system reliability under live operating conditions.",
      ],
    },
-   {
-     role: "Business Analyst Manager (Summer Internship)",
+  {
+    role: "Technical Project Manager",
      company: "Delumo — Salzburg, Austria",
      date: "Apr 2024 – Jul 2024",
      start: "2024-04",
